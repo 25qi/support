@@ -21,3 +21,5 @@ a { color: var(--fg); }
 .tools li { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--border); }
 .tools img { width: 32px; height: 32px; flex: none; }
 .provider + .provider { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+.intro { margin: 6px 0; }
+.intro + .intro { margin-top: 2px; }
