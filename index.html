@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-title-en="Support 25qi's tools" data-title-zh="支持 25qi 的小工具">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Support 25qi's tools</title>
+<meta name="description" content="Support the free tools made by 25qi." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="topbar">
+  <h1><span data-lang="en">Support my tools</span><span data-lang="zh">支持我的小工具</span></h1>
+  <div class="lang-switch" role="group" aria-label="Language"><button type="button" data-set-lang="en">English</button><button type="button" data-set-lang="zh">中文</button></div>
+</div>
+
+<div class="thanks" id="thanks" hidden>
+  <img id="thanksIcon" alt="" />
+  <div>
+    <div><b data-lang="en">Thanks for using <span class="tool-name"></span>!</b><b data-lang="zh">謝謝你使用 <span class="tool-name"></span>！</b></div>
+    <div class="muted"><span data-lang="en" id="thanksEn"></span><span data-lang="zh" id="thanksZh"></span></div>
+  </div>
+</div>
+
+<p data-lang="en">I build small free tools: no ads, no accounts, and they collect none of your data. If one of them saves you time, you can buy me a coffee. It keeps the tools maintained and helps new ones get made.</p>
+<p data-lang="zh">我做一些免費的小工具：沒有廣告、不用帳號，也不蒐集你的資料。如果它們幫你省下時間，歡迎請我喝杯咖啡，讓工具可以持續維護、也能做出新的工具。</p>
+
+<div class="donate">
+  <div class="provider" id="ecpay" hidden>
+    <a class="btn" id="ecpayBtn" target="_blank" rel="noopener"><span data-lang="en">Donate via ECPay (Taiwan)</span><span data-lang="zh">透過綠界贊助（台灣）</span></a>
+    <p class="muted" data-lang="en">For supporters in Taiwan: credit cards, ATM transfer and convenience store payment.</p>
+    <p class="muted" data-lang="zh">適合台灣的朋友：可用信用卡、ATM 轉帳與超商代碼。</p>
+  </div>
+  <div class="provider" id="bmc" hidden>
+    <a class="btn" id="bmcBtn" target="_blank" rel="noopener"><span data-lang="en">Buy me a coffee</span><span data-lang="zh">Buy Me a Coffee（國外）</span></a>
+    <p class="muted" data-lang="en">For supporters outside Taiwan: credit cards, Apple Pay and Google Pay.</p>
+    <p class="muted" data-lang="zh">適合台灣以外的朋友：可用信用卡、Apple Pay 與 Google Pay。</p>
+  </div>
+  <p class="muted" id="donateNote" hidden><span data-lang="en">Payment happens on the provider's own page. This page never sees your payment details.</span><span data-lang="zh">付款在各家金流自己的頁面完成，這個頁面不會經手你的付款資料。</span></p>
+  <div id="donateSoon">
+    <span class="soon"><span data-lang="en">Donations open soon</span><span data-lang="zh">贊助即將開放</span></span>
+    <p class="muted" data-lang="en">Thanks for wanting to help. The donation page is being set up; please check back later.</p>
+    <p class="muted" data-lang="zh">謝謝你想支持！贊助頁正在準備中，請稍後再回來看看。</p>
+  </div>
+</div>
+
+<h2><span data-lang="en">My tools</span><span data-lang="zh">我的小工具</span></h2>
+<ul class="tools" id="tools"></ul>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  var cfg = window.SUPPORT_CONFIG || { tools: {} };
+  var from = new URLSearchParams(location.search).get("from");
+  var tool = from && cfg.tools[from];
+  if (tool) {
+    document.getElementById("thanks").hidden = false;
+    document.getElementById("thanksIcon").src = tool.icon;
+    document.querySelectorAll(".tool-name").forEach(function (el) { el.textContent = tool.name; });
+    document.getElementById("thanksEn").textContent = tool.en;
+    document.getElementById("thanksZh").textContent = tool.zh;
+  }
+  var any = false;
+  [["ecpay", cfg.ecpayUrl], ["bmc", cfg.bmcUrl]].forEach(function (p) {
+    if (!/^https:\/\//.test(p[1] || "")) return;
+    document.getElementById(p[0] + "Btn").href = p[1];
+    document.getElementById(p[0]).hidden = false;
+    any = true;
+  });
+  document.getElementById("donateSoon").hidden = any;
+  document.getElementById("donateNote").hidden = !any;
+  var ul = document.getElementById("tools");
+  Object.keys(cfg.tools).forEach(function (k) {
+    var t = cfg.tools[k];
+    var li = document.createElement("li");
+    li.innerHTML = '<img alt="" /><div><a></a><div class="muted"><span data-lang="en"></span><span data-lang="zh"></span></div></div>';
+    li.querySelector("img").src = t.icon;
+    var a = li.querySelector("a"); a.href = t.url; a.textContent = t.name;
+    li.querySelector('[data-lang="en"]').textContent = t.en;
+    li.querySelector('[data-lang="zh"]').textContent = t.zh;
+    ul.appendChild(li);
+  });
+})();
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
