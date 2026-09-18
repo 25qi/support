@@ -24,6 +24,8 @@
 <p class="intro" lang="zh-Hant">如果它們有幫助到你，歡迎請我喝杯咖啡，讓工具可以持續維護，並支持我做出更多東西！</p>
 <p class="intro muted" lang="en">If they've helped you, feel free to buy me a coffee. It keeps the tools maintained and supports me in making more!</p>
 
+<p class="amounts"><span data-lang="zh">建議金額：NT$ 50、NT$ 100、NT$ 300，也可以自由填寫金額，全部以新台幣計價。</span><span data-lang="en">Suggested amounts: NT$50, NT$100 or NT$300, or any amount you like. All prices are in New Taiwan dollars (TWD).</span></p>
+
 <div class="donate">
   <div class="provider" id="ecpay" hidden>
     <a class="btn" id="ecpayBtn" target="_blank" rel="noopener"><span data-lang="en">Donate via ECPay (Taiwan)</span><span data-lang="zh">透過綠界贊助（台灣）</span></a>
@@ -42,6 +44,11 @@
     <p class="muted" data-lang="zh">謝謝你想支持！贊助頁正在準備中，請稍後再回來看看。</p>
   </div>
 </div>
+
+<section id="contact" hidden>
+  <h2><span data-lang="en">Contact</span><span data-lang="zh">聯絡方式</span></h2>
+  <p><span data-lang="en">Email:</span><span data-lang="zh">Email：</span> <a id="contactEmail"></a></p>
+</section>
 
 <h2><span data-lang="en">My tools</span><span data-lang="zh">我的小工具</span></h2>
 <ul class="tools" id="tools"></ul>
@@ -68,6 +75,12 @@
   });
   document.getElementById("donateSoon").hidden = any;
   document.getElementById("donateNote").hidden = !any;
+  if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cfg.contactEmail || "")) {
+    var a = document.getElementById("contactEmail");
+    a.textContent = cfg.contactEmail;
+    a.href = "mailto:" + cfg.contactEmail;
+    document.getElementById("contact").hidden = false;
+  }
   var ul = document.getElementById("tools");
   Object.keys(cfg.tools).forEach(function (k) {
     var t = cfg.tools[k];

@@ -5,6 +5,8 @@ window.SUPPORT_CONFIG = {
   // Buy Me a Coffee 頁面網址(https://buymeacoffee.com/…):國外贊助者用信用卡、Apple Pay、Google Pay
   bmcUrl: "",
   // 兩個都留空時,頁面顯示「贊助即將開放」
+  // 聯絡 email:綠界審核要求販售網址頁面顯示「跟綠界會員相同的聯絡資訊」;留空時不顯示聯絡區塊
+  contactEmail: "",
   // 各工具:從工具連過來時帶 ?from=<key>,頁面會顯示對應的感謝文字
   tools: {
     watchnotes: {
